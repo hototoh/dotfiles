@@ -1,0 +1,2 @@
+alias loga.nat="ssh -l toukaku -i ~/.ssh/id_rsa_lgry_tkk -L 54249:10.0.201.100:22 54.249.103.163"
+alias loga.batdev1="ssh -p 54249 -i ~/.ssh/id_rsa_lgry_tkk toukaku@localhost"

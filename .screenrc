@@ -1,0 +1,4 @@
+escape ^Tt
+shell -$SHELL
+startup_message off
+autodetach on

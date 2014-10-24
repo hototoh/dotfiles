@@ -1,0 +1,31 @@
+# set termianl configuration
+#
+case "${TERM}" in
+    screen)
+    TERM=xterm
+    ;;
+esac
+
+case "${TERM}" in
+xterm*)
+     export LSCOLORS=gxHfcxdxbxegedabagacad
+     zstyle ':completion:*' list-colors 'di=32' 'ln=35' 'so=32' 'ex=31' 'bd=46:34' 'cd=43:34'
+     ;;
+kterm*)
+     stty erase '^H'
+     export LSCOLORS=cxfxcxdxbxegedabagacad$
+     zstyle ':completion:*' list-colors 'di=34' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'cd=43;34'
+     ;;
+cons25)
+     ;;
+jfbterm-color)
+     ;;
+esac
+
+case "${TERM}" in
+xterm|xterm-color|kterm|kterm-color)
+    precmd() {
+        echo -ne "\033]0;${USER}@${HOST%%.*}:${PWD}\007"
+    }
+    ;;
+esac
