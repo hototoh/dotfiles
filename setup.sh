@@ -17,6 +17,13 @@ then
     install -o ${USER} -m 0600 -d $HOME/.vimbackup
 fi
 
+BUNDLE=${HOME}/dotfiles/.vim/bundle
+
+install -o ${USER} -m 0644 -d ${BUNDLE}
+cd ${BUNDLE}
+git clone https://github.com/Shougo/neobundle.vim
+cd -
+
 install -o ${USER} -m 0700 -d ${HOME}/.ssh 
 install -o ${USER} -m 0700 ssh/authorized_keys ${HOME}/.ssh/ 
 #install necessary files
