@@ -19,7 +19,7 @@ fi
 
 BUNDLE=${HOME}/dotfiles/.vim/bundle
 
-install -o ${USER} -m 0644 -d ${BUNDLE}
+install -o ${USER} -m 0744 -d ${BUNDLE}
 cd ${BUNDLE}
 git clone https://github.com/Shougo/neobundle.vim
 cd -
