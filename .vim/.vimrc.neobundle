@@ -17,7 +17,7 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/vimproc'
+"NeoBundle 'Shougo/vimproc'
 NeoBundle 'ujihisa/unite-locate'
 NeoBundle 'violetyk/cake.vim'
 NeoBundle 'tpope/vim-surround'

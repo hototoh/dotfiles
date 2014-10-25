@@ -2,11 +2,11 @@ case "${OSTYPE}" in
 # MacOSX
 darwin*)
     # ここに設定
-    [ -f ~/dotfiles/.zshrc.osx ] && source ~/dotfiles/.zshrc.osx
+    [ -f ${ZSHRC_DIR}.zshrc.osx ] && source ~/dotfiles/.zshrc.d/.zshrc.osx
     ;;
 # Linux
 linux*)
     # ここに設定
-    [ -f ~/dotfiles/.zshrc.linux ] && source ~/dotfiles/.zshrc.linux
+    [ -f ${ZSHRC_DIR}.zshrc.linux ] && source ~/dotfiles/.zshrc.d/.zshrc.linux
     ;;
 esac
