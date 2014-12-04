@@ -14,7 +14,7 @@ done
 
 if [ ! -e $HOME/.vimbackup ];
 then
-    install -o ${USER} -m 0600 -d $HOME/.vimbackup
+    install -o ${USER} -m 0700 -d $HOME/.vimbackup
 fi
 
 BUNDLE=${HOME}/dotfiles/.vim/bundle

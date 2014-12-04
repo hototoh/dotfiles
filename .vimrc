@@ -1,6 +1,8 @@
 " neobundleで管理されているもの
 source ~/.vim/.vimrc.neobundle
 
+set encoding=utf-8
+
 "新しい行のインデントを現在行と同じにする
 set autoindent
 "バックアップファイルを作るディレクトリ

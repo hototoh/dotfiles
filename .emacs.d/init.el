@@ -61,6 +61,12 @@
 (dolist (pkg not-installed)
     (package-install pkg))))
 
+(require 'auto-complete)
+(require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+(ac-config-default)
+(setq ac-modes (append ac-modes '(objc-mode)))
+
 ;; 対応する括弧の強調
 (show-paren-mode t)
 ; 外部デバイスとクリップボードを共有
@@ -204,23 +210,23 @@
 ;;(require 'go-mode)
 
 ;; Python-mode-hook
-;;(require 'python-mode)
-;;
-;; (add-hook 'python-mode-hook
-;; 	  (lambda ()
-;; 	    (define-key python-mode-map "\"" 'electric-pair)
-;; 	    (define-key python-mode-map "\'" 'electric-pair)
-;; 	    (define-key python-mode-map "(" 'electric-pair)
-;; 	    (define-key python-mode-map "[" 'electric-pair)
-;; 	    (define-key python-mode-map "{" 'electric-pair)))
-;;
-;; (defun electric-pair ()
-;;   "Insert character pair without sournding spaces"
-;;   (interactive)
-;;   (let (parens-require-spaces)
-;;     (insert-pair)))
-;; (add-hook 'python-mode-hook '(lambda ()
-;; 			       (define-key python-mode-map "\C-m" 'newline-and-indent)))
+(require 'python-mode)
+
+ (add-hook 'python-mode-hook
+ 	  (lambda ()
+ 	    (define-key python-mode-map "\"" 'electric-pair)
+ 	    (define-key python-mode-map "\'" 'electric-pair)
+ 	    (define-key python-mode-map "(" 'electric-pair)
+ 	    (define-key python-mode-map "[" 'electric-pair)
+ 	    (define-key python-mode-map "{" 'electric-pair)))
+
+ (defun electric-pair ()
+   "Insert character pair without sournding spaces"
+   (interactive)
+   (let (parens-require-spaces)
+     (insert-pair)))
+ (add-hook 'python-mode-hook '(lambda ()
+ 			       (define-key python-mode-map "\C-m" 'newline-and-indent)))
 
 ;; R-mode-hook
 ;;(require 'ess-mode)
