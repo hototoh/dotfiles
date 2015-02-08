@@ -17,8 +17,8 @@ set nocompatible
 set directory=$HOME/.vimbackup
 "タブの代わりに空白文字を挿入する
 set expandtab
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 "変更中のファイルでも、保存しないで他のファイルを表示
 set hidden
 "インクリメンタルサーチを行う
@@ -64,7 +64,7 @@ au BufNewFile,BufRead * set iminsert=0
 au BufNewFile,BufRead * set tabstop=4 shiftwidth=4
 
 ".txtファイルで自動的に日本語入力ON
-au BufNewFile,BufRead *.txt set iminsert=2
+"au BufNewFile,BufRead *.txt set iminsert=2
 ".rhtmlと.rbでタブ幅を変更
 au BufNewFile,BufRead *.rhtml   set nowrap tabstop=2 shiftwidth=2
 au BufNewFile,BufRead *.rb  set nowrap tabstop=2 shiftwidth=2

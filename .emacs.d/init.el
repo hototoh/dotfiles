@@ -1,5 +1,5 @@
 ;; 言語設定
-;;(set-language-environment 'Japanese)
+(set-language-environment 'Japanese)
 ;; 文字コード設定
 (prefer-coding-system 'utf-8)
 ;; パスの設定
@@ -103,14 +103,14 @@
 (setq tab-width 4)
 (setq indent-tabs-mode nil)
 
-(defun my-c-mode-hook ()
-    (c-set-style "linux")
-    (setq c-basic-offset 4)
-    (setq tab-width c-basic-offset)
-    (setq indent-tabs-mode nil)
-    )
-(add-hook 'c-mode-hook 'my-c-mode-hook)
-(add-hook 'c++-mode-hook 'my-c-mode-hook)
+;;(defun my-c-mode-hook ()
+;;    (c-set-style "linux")
+;;    (setq c-basic-offset 4)
+;;    (setq tab-width c-basic-offset)
+;;    (setq indent-tabs-mode nil)
+;;    )
+;;(add-hook 'c-mode-hook 'my-c-mode-hook)
+;;(add-hook 'c++-mode-hook 'my-c-mode-hook)
 
 ;; emacs内部シェルのlsオプション設定
 (setq dired-listing-switches "-lh")
@@ -227,6 +227,65 @@
      (insert-pair)))
  (add-hook 'python-mode-hook '(lambda ()
  			       (define-key python-mode-map "\C-m" 'newline-and-indent)))
+;;; Pythonにて1行80文字を超えるとハイライト
+(add-hook 'python-mode-hook
+  (lambda ()
+    (font-lock-add-keywords nil
+      '(("^[^\n]\\{80\\}\\(.*\\)$" 1 font-lock-warning-face t)))))
+
+;; C, C++ Style
+(defun my-c-namespace-indent (langelem)
+    (save-excursion
+        (if (or (looking-at "[ \t]*namespace[ \t{]")
+                (looking-at "[ \t]*namespace[ \t]+[_a-zA-Z]")
+                (looking-at "[ \t]*}")
+             ) 0
+            (if (or (looking-at "[ \t]*class[ \t{]")
+                    (looking-at "[ \t]*class[ \t]+[_a-zA-Z]")
+                ) 0
+                (if (progn (goto-char (cdr langelem))
+                           (skip-chars-backward " \t")
+                           (bolp)) 2)
+          )))) 
+(defun my-c-c++-mode-init () 
+    (require 'google-c-style) 
+    (google-set-c-style)
+    (google-make-newline-indent)
+    (add-hook 'c-mode-common-hook 'google-set-c-style)
+    (setq tab-width 2) 
+    (setq c-basic-offset 2)
+;;    (c-set-offset 'innamespace 'my-c-namespace-indent)
+    (c-set-offset 'innamespace 0)
+    (c-set-offset 'class-open 0)
+    (c-set-offset 'class-close 0)
+    (c-set-offset 'namespace-open 0)
+    (c-set-offset 'namespace-close 0)
+    (c-set-offset 'access-label '/)
+    (auto-revert-mode)
+)
+(add-hook 'c++-mode-hook 'my-c-c++-mode-init)
+(add-hook 'c++-mode-hook
+  (lambda ()
+    (font-lock-add-keywords nil
+      '(("^[^\n]\\{80\\}\\(.*\\)$" 1 font-lock-warning-face t)))
+   ))
+(add-hook 'c-mode-hook 'my-c-c++-mode-init)
+(add-to-list 'auto-mode-alist '("\\.h$" . c++-mode))
+;;; C系統,Pythonにて1行80文字を超えるとハイライト
+;;  (lambda ()
+;;    (font-lock-add-keywords nil
+;;      '(("^[^\n]\\{80\\}\\(.*\\)$" 1 font-lock-warning-face t)))
+;;   ))
+;;(add-hook 'c++-mode-hook
+;;  (lambda ()
+;;    (font-lock-add-keywords nil
+;;      '(("^[^\n]\\{80\\}\\(.*\\)$" 1 font-lock-warning-face t)))
+;;   ))
+;;; Javaで1行100文字を超えるとハイライト
+(add-hook 'java-mode-hook
+  (lambda ()
+    (font-lock-add-keywords nil
+      '(("^[^\n]\\{100\\}\\(.*\\)$" 1 font-lock-warning-face t)))))
 
 ;; R-mode-hook
 ;;(require 'ess-mode)
