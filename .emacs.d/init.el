@@ -125,16 +125,6 @@
 (define-auto-insert "\\.py$" "python-template")
 (define-auto-insert "\\.c$" "C-template")
 
-;; auto-install
-;;(require 'auto-install)
-;;(setq auto-install-directory "~/.emacs.d/elisp/")
-;;(auto-install-update-emacswiki-package-name t)
-;;(auto-install-compatibility-setup)
-;;
-;;;auto-completeの設定
-;;(setq load-path (cons "~/.emacs.d/elisp/auto-complete" load-path))
-;;(require 'auto-complete)
-;;(global-auto-complete-mode t)
 
 
 ;; 辞書保存
@@ -142,39 +132,39 @@
 ;(setq ac-dictionary-directories "~/.emacs.d/elisp/auto-complete-dics/")
 ;; 
 ;; anything --------------------------------------
-;; 
-;; (require 'anything)
-;; (require 'anything-startup)
-;; (require 'anything-config)
-;; (require 'recentf)
-;; (add-to-list 'anything-sources 'anything-c-source-emacs-commands)
-;; (define-key global-map (kbd "C-^") 'anything) ;Ctrl-^で起動
-;; ;; 縦横切り替え
-;; (defun my-anything-toggle-resplit-window ()
-;;   (interactive)
-;;   (when (anything-window)
-;;     (save-selected-window
-;;       (select-window (anything-window))
-;;       (let ((before-height (window-height)))
-;;         (delete-other-windows)
-;;         (switch-to-buffer anything-current-buffer)
-;;         (if (= (window-height) before-height)
-;;             (split-window-vertically)
-;;           (split-window-horizontally)))
-;;       (select-window (next-window))
-;;       (switch-to-buffer anything-buffer))))
 
-;; (define-key anything-map "\C-j" 'my-anything-toggle-resplit-window)
-;; ;;バッファの一覧を取得
-;; ;;anything-c-source-buffers
-;; ;;バッファにマッチしなかった場合にバッファを作成
-;; ;;anything-c-source-buffer-not-found
-;; ;;カレントディレクトリにあるファイル一覧
-;; ;;anything-c-source-files-in-current-dir
-;; ;;最近開いたファイル一覧
-;; ;;anything-c-source-recentf
-;; (setq recentf-max-saved-items 3000)
-;; (recentf-mode 1)
+(require 'anything)
+(require 'anything-startup)
+(require 'anything-config)
+(require 'recentf)
+(add-to-list 'anything-sources 'anything-c-source-emacs-commands)
+(define-key global-map (kbd "C-^") 'anything) ;Ctrl-^で起動
+;; 縦横切り替え
+(defun my-anything-toggle-resplit-window ()
+  (interactive)
+  (when (anything-window)
+    (save-selected-window
+      (select-window (anything-window))
+      (let ((before-height (window-height)))
+        (delete-other-windows)
+        (switch-to-buffer anything-current-buffer)
+        (if (= (window-height) before-height)
+            (split-window-vertically)
+          (split-window-horizontally)))
+      (select-window (next-window))
+      (switch-to-buffer anything-buffer))))
+
+(define-key anything-map "\C-j" 'my-anything-toggle-resplit-window)
+;;バッファの一覧を取得
+anything-c-source-buffers
+;;バッファにマッチしなかった場合にバッファを作成
+anything-c-source-buffer-not-found
+;;カレントディレクトリにあるファイル一覧
+anything-c-source-files-in-current-dir
+;;最近開いたファイル一覧
+anything-c-source-recentf
+(setq recentf-max-saved-items 3000)
+(recentf-mode 1)
 
 
 
