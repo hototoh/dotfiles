@@ -1,0 +1,14 @@
+#!/bin/bash
+
+function usage () {
+    echo "Usage:./key_deploy <server_list_path> <pub_key_path>"
+}
+
+
+if ! [ $# -eq 2 ] ||  ! [ -f $1 ] || ! [ -f $2 ]; then
+    usage
+    exit 0
+fi
+
+
+for server in `cat $1`; do cat $2 | ssh tkk@${server} "cat >> .ssh/authorized_keys"; done;
