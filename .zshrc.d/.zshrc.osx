@@ -1,4 +1,5 @@
 # library path in the program execution time
 export DYLD_FALLBACK_LIBRARY_PATH=/opt/local/lib:/usr/local/lib
 export CPATH=/opt/local/include:/usr/local/include
+export HOMEBREW_MAKE_JOBS=4
 #export LIBDIR=/opt/local/lib:/usr/local/lib
