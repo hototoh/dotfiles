@@ -3,3 +3,10 @@ export DYLD_FALLBACK_LIBRARY_PATH=/opt/local/lib:/usr/local/lib
 export CPATH=/opt/local/include:/usr/local/include
 export HOMEBREW_MAKE_JOBS=4
 #export LIBDIR=/opt/local/lib:/usr/local/lib
+
+if [ -f $(brew --prefix nvm)/nvm.sh ]; then
+  source $(brew --prefix nvm)/nvm.sh
+  npm_dir=${NVM_PATH}_modules
+  export NODE_PATH=$npm_dir
+fi
+nvm use v0.10.25
