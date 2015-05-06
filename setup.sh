@@ -25,7 +25,11 @@ git clone https://github.com/Shougo/neobundle.vim
 cd -
 
 install -o ${USER} -m 0700 -d ${HOME}/.ssh 
-install -o ${USER} -m 0700 ssh/authorized_keys ${HOME}/.ssh/ 
+if [ ! -e $HOME/.ssh/authorized_keys ];
+then
+    install -o ${USER} -m 0700 ssh/authorized_keys ${HOME}/.ssh/ 
+fi
+
 #install necessary files
 #[! -d $HOME/<necessary dir>] && git clone git://============================== $HOME/<necessary dir>
 
