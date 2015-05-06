@@ -260,6 +260,11 @@ anything-c-source-recentf
       '(("^[^\n]\\{80\\}\\(.*\\)$" 1 font-lock-warning-face t)))
    ))
 (add-hook 'c-mode-hook 'my-c-c++-mode-init)
+(add-hook 'c-mode-hook
+  (lambda ()
+    (font-lock-add-keywords nil
+      '(("^[^\n]\\{80\\}\\(.*\\)$" 1 font-lock-warning-face t)))
+   ))
 (add-to-list 'auto-mode-alist '("\\.h$" . c++-mode))
 ;;; C系統,Pythonにて1行80文字を超えるとハイライト
 ;;  (lambda ()
