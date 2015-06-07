@@ -124,6 +124,7 @@
 (setq auto-insert-directory "~/.emacs.d/insert/")
 (define-auto-insert "\\.py$" "python-template")
 (define-auto-insert "\\.c$" "C-template")
+(define-auto-insert "\\.cc$" "CC-template")
 
 
 
