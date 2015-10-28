@@ -155,3 +155,9 @@ map <C-h> :Gtags -f %<CR>
 map <C-j> :GtagsCursor<CR>
 map <C-n> :cn<CR>
 map <C-p> :cp<CR>
+
+""""""""""""""""""""""""""""""
+" Color Scheme
+"""""""""""""""""""""""""""""""
+colorscheme pablo
+set t_Co=256
