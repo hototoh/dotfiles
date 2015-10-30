@@ -203,21 +203,21 @@ anything-c-source-recentf
 ;; Python-mode-hook
 (require 'python-mode)
 
- (add-hook 'python-mode-hook
- 	  (lambda ()
- 	    (define-key python-mode-map "\"" 'electric-pair)
- 	    (define-key python-mode-map "\'" 'electric-pair)
- 	    (define-key python-mode-map "(" 'electric-pair)
- 	    (define-key python-mode-map "[" 'electric-pair)
- 	    (define-key python-mode-map "{" 'electric-pair)))
-
- (defun electric-pair ()
-   "Insert character pair without sournding spaces"
-   (interactive)
-   (let (parens-require-spaces)
-     (insert-pair)))
- (add-hook 'python-mode-hook '(lambda ()
- 			       (define-key python-mode-map "\C-m" 'newline-and-indent)))
+;; (add-hook 'python-mode-hook
+;; 	  (lambda ()
+;; 	    (define-key python-mode-map "\"" 'electric-pair)
+;; 	    (define-key python-mode-map "\'" 'electric-pair)
+;; 	    (define-key python-mode-map "(" 'electric-pair)
+;; 	    (define-key python-mode-map "[" 'electric-pair)
+;; 	    (define-key python-mode-map "{" 'electric-pair)))
+;;
+;; (defun electric-pair ()
+;;   "Insert character pair without sournding spaces"
+;;   (interactive)
+;;   (let (parens-require-spaces)
+;;     (insert-pair)))
+;; (add-hook 'python-mode-hook '(lambda ()
+;; 			       (define-key python-mode-map "\C-m" 'newline-and-indent)))
 ;;; Pythonにて1行80文字を超えるとハイライト
 (add-hook 'python-mode-hook
   (lambda ()
@@ -243,8 +243,8 @@ anything-c-source-recentf
     (google-set-c-style)
     (google-make-newline-indent)
     (add-hook 'c-mode-common-hook 'google-set-c-style)
-    (setq tab-width 2) 
-    (setq c-basic-offset 2)
+    (setq tab-width 4) 
+    (setq c-basic-offset 4)
 ;;    (c-set-offset 'innamespace 'my-c-namespace-indent)
     (c-set-offset 'innamespace 0)
     (c-set-offset 'class-open 0)
