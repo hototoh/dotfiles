@@ -35,7 +35,7 @@
     flymake-python-pyflakes
     flymake-shell
     flymake-yaml
-    github-theme
+    ;;github-theme
     go-mode
     google-c-style
     hlinum
@@ -304,4 +304,4 @@ anything-c-source-recentf
 ;;      (define-key ess-mode-map "\177"   'delete-char)
 ;;      (setq ess-ask-for-ess-directory nil)
 ;;     ))
-;;
+(load-theme 'wombat t)
