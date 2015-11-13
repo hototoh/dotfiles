@@ -88,6 +88,8 @@
 (define-key global-map (kbd "C-'") 'expand-addrev)
 ;; Ctrl + hでdelete backward char
 (define-key global-map (kbd "C-h") 'delete-backward-char)
+;; Ctrl-x p で逆向きへのウィンドウ移動
+(global-set-key "\C-xp" (lambda () (interactive) (other-window -1)))
 
 ;; ウインドウ間移動のキーバインドにC-\を追加
 (define-key global-map "\C-\\" 'other-window)
