@@ -1,12 +1,17 @@
 # library path in the program execution time
-export DYLD_FALLBACK_LIBRARY_PATH=/opt/local/lib:/usr/local/lib
+#export DYLD_FALLBACK_LIBRARY_PATH=/opt/local/lib:/usr/local/lib:/usr/lib
+#export DYLD_LIBRARY_PATH=/usr/lib:/usr/local/lib:/opt/local/lib
 export CPATH=/opt/local/include:/usr/local/include
 export HOMEBREW_MAKE_JOBS=4
+# never set
+#export GOROOT=/usr/local/go
+export GOPATH=$HOME/.go:/usr/local/go/libexec
+export PATH=$PATH:/usr/local/go/bin:/Users/tkk/.cabal/bin
 #export LIBDIR=/opt/local/lib:/usr/local/lib
 
-if [ -f $(brew --prefix nvm)/nvm.sh ]; then
-  source $(brew --prefix nvm)/nvm.sh
-  npm_dir=${NVM_PATH}_modules
-  export NODE_PATH=$npm_dir
-fi
-nvm use v0.10.25
+#if [ -f $(brew --prefix nvm)/nvm.sh ]; then
+#  source $(brew --prefix nvm)/nvm.sh
+#  npm_dir=${NVM_PATH}_modules
+#  export NODE_PATH=$npm_dir
+#fi
+#nvm use v0.10.25

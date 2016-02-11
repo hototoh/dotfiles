@@ -24,6 +24,7 @@
     auto-install
     dash
     epl
+    erlang
     flycheck
     flycheck-google-cpplint
     flymake
@@ -44,6 +45,8 @@
     json-mode
     json-reformat
     json-snatcher
+    lua-mode
+    lfe-mode
     markdown-mode
     pkg-info
     python
