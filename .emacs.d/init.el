@@ -289,6 +289,15 @@ anything-c-source-recentf
     (font-lock-add-keywords nil
       '(("^[^\n]\\{100\\}\\(.*\\)$" 1 font-lock-warning-face t)))))
 
+;; Erlang
+(setq erlang-root-dir "/urr/local/Cellar/erlang/18.2.2")
+(require 'erlang-start)
+(require 'erlang-flymake)
+;; append elrang-mode
+(setq ac-modes
+  (append ac-modes
+      (list 'erlang-mode)))
+
 ;; R-mode-hook
 ;;(require 'ess-mode)
 ;;(setq auto-mode-alist
