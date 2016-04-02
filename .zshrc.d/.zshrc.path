@@ -1,3 +1,5 @@
-export PATH=/opt/local/bin:/opt/local/sbin:$PATH
-export PATH=$PATH:/Users/tkk/lib/depot_tools
 export PATH=/usr/local/ghc-7.10.2/bin:$PATH
+
+export GOPATH=$HOME/.go:/usr/local/go/libexec
+export PATH=$PATH:/usr/local/go/bin:/Users/${USER}/.cabal/bin
+

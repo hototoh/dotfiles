@@ -30,7 +30,3 @@ source $ZSHRC_DIR/.zshrc.terminal
 #
 source $ZSHRC_DIR/.zshrc.ostype
 
-## LOGARHYTHM
-#
-source $ZSHRC_DIR/.zshrc.logarhythm
-export PATH="/usr/local/sbin:$PATH"

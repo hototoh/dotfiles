@@ -10,7 +10,7 @@ alias df="df -h"
 
 alias su="su -l"
 
-alias socks="ssh -2 -D localhost:1080 -l tkk elab-gw.ic.i.u-tokyo.ac.jp"
+alias esocks="ssh -i -2 -D localhost:1080 -l tkk elab-gw.ic.i.u-tokyo.ac.jp"
 
 case "${OSTYPE}" in
 darwin*)
