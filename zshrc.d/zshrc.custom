@@ -1,0 +1,49 @@
+## Environment variable configuration
+#
+# LANG
+export LANG=en_US.UTF-8
+export LC_COLLATE="en_US.UTF-8"
+export LC_CTYPE="en_US.UTF-8"
+export LC_MESSAGES="en_US.UTF-8"
+export LC_MONETARY="en_US.UTF-8"
+export LC_NUMERIC="en_US.UTF-8"
+export LC_TIME="en_US.UTF-8"
+export LESSCHARSET=utf-8
+
+autoload -Uz compinit
+compinit
+
+# ヒストリの設定
+HISTFILE=$ZSHRC_DIR/.zsh_history
+HISTSIZE=50000
+SAVEHIST=50000
+setopt share_history
+setopt hist_ignore_dups
+
+# auto directory pushd that you can get dirs list by cd -[tab]
+setopt auto_pushd
+setopt auto_menu
+setopt auto_list
+setopt auto_param_keys # カッコの対応などを自動的に補完する
+setopt auto_param_slash # ディレクトリ名の補完で末尾の / を自動的に付加し、次の補完に備える
+
+# {a-c} を a b c に展開する機能を使えるようにする
+setopt brace_ccl
+
+# command correct edition before each completion attempt
+# setopt correct
+# setopt correct_all
+#
+setopt list_packed
+setopt list_types
+
+setopt magic_equal_subst
+setopt noautoremoveslash
+setopt nolistbeep
+# setopt no_clobber
+
+# sudoも補完の対象
+zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin /usr/sbin /usr/bin /sbin /bin
+
+autoload -U colors && colors
+setopt promptsubst

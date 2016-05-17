@@ -1,0 +1,13 @@
+# set termianl configuration
+# color
+export LSCOLORS=exfxcxdxbxegedabagacad
+
+export LS_COLORS="no=00:fi=00:di=01;36:ln=01;34"
+zstyle ':completion:*' list-colors di=34 ln=35 ex=31
+zstyle ':completion:*:kill:*' list-colors \
+   '=(#b) #([0-9]#)*( *[a-z])*=34=31=33'
+
+# format setting
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*:descriptions' format '%BCompleting%b %U%d%u'
+

@@ -130,6 +130,7 @@
 (define-auto-insert "\\.py$" "python-template")
 (define-auto-insert "\\.c$" "C-template")
 (define-auto-insert "\\.cc$" "CC-template")
+(define-auto-insert "\\.pcon.cc$" "programming-contests-template")
 (define-auto-insert "\\.erl$" "Erlang-template.erl")
 
 

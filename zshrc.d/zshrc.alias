@@ -1,10 +1,6 @@
 alias where="command -v"
 alias j="jobs -l"
 
-alias la="ls -alF -G"
-alias lf="ls -F -G"
-alias ll="ls -l -G"
-
 alias du="du -h"
 alias df="df -h"
 
@@ -15,12 +11,16 @@ alias esocks="ssh -i -2 -D localhost:1080 -l tkk elab-gw.ic.i.u-tokyo.ac.jp"
 case "${OSTYPE}" in
 darwin*)
     alias lsusb='system_profiler SPUSBDataType'
-    alias ls="ls -G -w"
+    alias ls="ls --color=auto"
     ;;
 freebsd*)
     alias ls="ls -G -w"
     ;;
 linux*)
-    alias ls="ls --color"
+    alias ls="ls --color=auto"
     ;;
 esac
+alias la="ls -alF"
+alias lf="ls -F"
+alias ll="ls -l"
+

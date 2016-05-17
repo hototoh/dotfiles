@@ -1,9 +1,5 @@
-# library path in the program execution time
-#export DYLD_FALLBACK_LIBRARY_PATH=/opt/local/lib:/usr/local/lib:/usr/lib
-#export DYLD_LIBRARY_PATH=/usr/lib:/usr/local/lib
 export CPATH=/usr/local/include
 export HOMEBREW_MAKE_JOBS=4
-
 
 #if [ -f $(brew --prefix nvm)/nvm.sh ]; then
 #  source $(brew --prefix nvm)/nvm.sh
