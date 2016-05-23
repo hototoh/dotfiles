@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 DOT_FILES=("zshrc.d" "zshrc" "vimrc" "vim" "emacs.d" "screenrc" "globalrc" "tmux.conf")
 
@@ -30,6 +30,9 @@ if [ ! -e $HOME/.ssh/authorized_keys ];
 then
     install -o ${USER} -m 0700 ssh/authorized_keys ${HOME}/.ssh/ 
 fi
+
+mkdir $HOME/.cache
+curl -sL get.zplug.sh | zsh
 
 #install necessary files
 #[! -d $HOME/<necessary dir>] && git clone git://============================== $HOME/<necessary dir>
