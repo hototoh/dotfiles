@@ -127,11 +127,12 @@
 ;; template settings
 (auto-insert-mode)
 (setq auto-insert-directory "~/.emacs.d/insert/")
-(define-auto-insert "\\.py$" "python-template")
-(define-auto-insert "\\.c$" "C-template")
-(define-auto-insert "\\.cc$" "CC-template")
-(define-auto-insert "\\.pcon.cc$" "programming-contests-template")
-(define-auto-insert "\\.erl$" "Erlang-template.erl")
+(define-auto-insert "\\.py$" "basic-template.py")
+(define-auto-insert "\\.c$" "basic-template.c")
+(define-auto-insert "\\.cc$" "basic-template.py")
+(define-auto-insert "\\.pcon.cc$" "programming-contest-template.cc")
+(define-auto-insert "\\.erl$" "basic-template.erl")
+(define-auto-insert "\\.html$" "basic-template.html")
 
 
 

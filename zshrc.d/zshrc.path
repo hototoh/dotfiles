@@ -1,6 +1,8 @@
 export PATH=/usr/libexec:$PATH
 
-export GOPATH=$HOME/.go:/usr/local/go/libexec
-export PATH=$PATH:/usr/local/go/bin:/Users/${USER}/.cabal/bin
+export GOPATH=${HOME}/.go:/usr/local/go/libexec
+export PATH=$PATH:/usr/local/go/bin:${HOME}/.cabal/bin
 
 export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+
+export NVM_DIR="${HOME}.nvm"

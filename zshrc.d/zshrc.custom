@@ -47,3 +47,14 @@ zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin /usr/s
 
 autoload -U colors && colors
 setopt promptsubst
+
+export CDH5_HOME=$HOME/cdh5
+export HADOOP_HOME=$CDH5_HOME/hadoop-2.6.0-cdh5.4.9
+export HADOOP_LOG_DIR=$HADOOP_HOME/logs
+export HADOOP_CONF_DIR=/etc/hadoop/conf
+export HADOOP_OPTS="-Djava.security.krb5.conf=/etc/krb5.conf"
+export PIG_HOME=$CDH5_HOME/pig-0.12.0-cdh5.4.9
+export PIG_CLASSPATH="$HADOOP_CONF_DIR:$HADOOP_HOME/*:$HADOOP_HOME/lib/*"
+export HBASE_HOME=$CDH5_HOME/hbase-1.0.0-cdh5.4.9
+export HBASE_CONF_DIR=/etc/hbase/conf
+export PATH=$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$PIG_HOME/bin:$HBASE_HOME/bin:$PATH

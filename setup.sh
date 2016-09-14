@@ -13,12 +13,12 @@ do
     fi
 done
 
-if [ ! -e $HOME/.vimbackup ];
+if [ ! -e ${HOME}/.vimbackup ];
 then
-    install -o ${USER} -m 0700 -d $HOME/.vimbackup
+    install -o ${USER} -m 0700 -d ${HOME}/.vimbackup
 fi
 
-BUNDLE=${HOME}/dotfiles/.vim/bundle
+BUNDLE=${HOME}/dotfiles/vim/bundle
 
 install -o ${USER} -m 0744 -d ${BUNDLE}
 cd ${BUNDLE}
@@ -26,12 +26,12 @@ git clone https://github.com/Shougo/neobundle.vim
 cd -
 
 install -o ${USER} -m 0700 -d ${HOME}/.ssh 
-if [ ! -e $HOME/.ssh/authorized_keys ];
+if [ ! -e ${HOME}/.ssh/authorized_keys ];
 then
     install -o ${USER} -m 0700 ssh/authorized_keys ${HOME}/.ssh/ 
 fi
 
-mkdir $HOME/.cache
+mkdir ${HOME}/.cache
 curl -sL get.zplug.sh | zsh
 
 #install necessary files
