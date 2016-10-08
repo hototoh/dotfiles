@@ -5,15 +5,10 @@ zplug "zsh-users/zsh-syntax-highlighting", nice:10
 zplug "zsh-users/zsh-completions"
 zplug "plugins/ant", from:oh-my-zsh, if:"(( $+commands[ant] ))"
 
-_Z_DATA=${HOME}/.cache/z_cache
-zplug "knu/z", use:z.sh
-
-#zplug "marzocchi/zsh-notify", if:"[[ $OSTYPE == *darwin* ]]"
-
 zplug "themes/clean", from:oh-my-zsh
 
 # Install plugins if there are plugins that have not been installed
-if ! zplug check --verbose; then
+if ! zplug check ; then
     printf "Install? [y/N]: "
     if read -q; then
         echo; zplug install
@@ -22,7 +17,7 @@ fi
 
 # Then, source plugins and add commands to $PATH
 if [ $UID -eq 0 ]; then NCOLOR="red"; else NCOLOR="red"; fi
-zplug load --verbose
+zplug load
 
 # override themes/clean color
 if [ $UID -eq 0 ]; then NCOLOR="red"; else NCOLOR="magenta"; fi

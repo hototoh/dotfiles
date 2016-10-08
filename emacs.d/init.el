@@ -11,7 +11,10 @@
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+(add-to-list 'load-path "/usr/local/share/gtags")
 (package-initialize)
+
+(global-linum-mode t)
 
 ;auto install
 (require 'cl)
@@ -108,15 +111,6 @@
 (setq tab-width 4)
 (setq indent-tabs-mode nil)
 
-;;(defun my-c-mode-hook ()
-;;    (c-set-style "linux")
-;;    (setq c-basic-offset 4)
-;;    (setq tab-width c-basic-offset)
-;;    (setq indent-tabs-mode nil)
-;;    )
-;;(add-hook 'c-mode-hook 'my-c-mode-hook)
-;;(add-hook 'c++-mode-hook 'my-c-mode-hook)
-
 ;; emacs内部シェルのlsオプション設定
 (setq dired-listing-switches "-lh")
 
@@ -175,38 +169,6 @@ anything-c-source-recentf
 (setq recentf-max-saved-items 3000)
 (recentf-mode 1)
 
-
-
-;====================================
-;;全角スペースとかに色を付ける
-;====================================
-;(defface my-face-b-1 '((t (:background "medium aquamarine"))) nil)
-;(defface my-face-b-1 '((t (:background "dark turquoise"))) nil)
-;(defface my-face-b-2 '((t (:background "cyan"))) nil)
-;(defface my-face-b-2 '((t (:background "SeaGreen"))) nil)
-;(defface my-face-u-1 '((t (:foreground "SteelBlue" :underline t))) nil)
-;(defvar my-face-b-1 'my-face-b-1)
-;(defvar my-face-b-2 'my-face-b-2)
-;(defvar my-face-u-1 'my-face-u-1)
-;(defadvice font-lock-mode (before my-font-lock-mode ())
-;              (font-lock-add-keywords
-;	       major-mode
-;	       '(
-;		 ("　" 0 my-face-b-1 append)
-;		 ("\t" 0 my-face-b-2 append)
-;		 ("[ ]+$" 0 my-face-u-1 append)
-;		 )))
-;(ad-enable-advice 'font-lock-mode 'before 'my-font-lock-mode)
-;(ad-activate 'font-lock-mode)
-;(add-hook 'find-file-hooks '(lambda ()
-;			      (if font-lock-mode
-;				  nil
-;				(font-lock-mode t))))
-
-;; Go lang
-;;(add-to-list 'exec-path (expand-file-name "~/.gopath/bin"))
-;;(require 'go-mode-load)
-;;(require 'go-mode)
 
 ;; Python-mode-hook
 (require 'python-mode)
@@ -300,25 +262,21 @@ anything-c-source-recentf
   (append ac-modes
       (list 'erlang-mode)))
 
-;; R-mode-hook
-;;(require 'ess-mode)
-;;(setq auto-mode-alist
-;;      (cons (cons "\\.r$" 'R-mode) auto-mode-alist))
-;;(autoload 'R-mode "ess-site" "Emacs Speaks Statistics mode" t)
-;;(setq load-path (cons (expand-file-name "/usr/share/emacs-21.3/site-lisp/ess")   load-path))
-;;(setq ess-pre-run-hook
-;;  '((lambda () (setq S-directory default-directory)
-;;          (setq default-process-coding-ssyntstem '(euc-japan-unix .   euc-japan-unix))
-;;       )))
-;;(autoload 'R "ess-site" nil 'interactive)
-;;(eval-after-load "R"
-;; '(progn
-;;      (set-language-environment "Japanese")
-;;      (set-default-coding-systems 'euc-japan-unix)
-;;      (set-terminal-coding-system 'euc-japan-unix)
-;;      (set-keyboard-coding-system 'euc-japan-unix)
-;;      (set-buffer-file-coding-system 'euc-japan-unix)
-;;      (define-key ess-mode-map "\177"   'delete-char)
-;;      (setq ess-ask-for-ess-directory nil)
-;;     ))
+(require 'helm-config)
+(require 'helm-gtags)
+
+(add-hook 'c-mode-hook 'helm-gtags-mode)
+(add-hook 'c++-mode-hook 'helm-gtags-mode)
+(add-hook 'go-mode-hook (lambda () (helm-gtags-mode)))
+(add-hook 'python-mode-hook (lambda () (helm-gtags-mode)))  
+(add-hook 'ruby-mode-hook (lambda () (helm-gtags-mode)))                         
+(setq helm-gtags-path-style 'root)                       
+(setq helm-gtags-auto-update t)
+(add-hook 'helm-gtags-mode-hook
+          '(lambda ()                                                                   
+             (local-set-key (kbd "M-g") 'helm-gtags-dwim)
+             (local-set-key (kbd "M-s") 'helm-gtags-show-stack)
+             (local-set-key (kbd "M-p") 'helm-gtags-previous-history)
+             (local-set-key (kbd "M-n") 'helm-gtags-next-history)))    
+
 (load-theme 'wombat t)

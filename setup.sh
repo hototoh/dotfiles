@@ -34,6 +34,14 @@ fi
 mkdir ${HOME}/.cache
 curl -sL get.zplug.sh | zsh
 
+case "${OSTYPE}" in
+# MacOSX
+darwin*)
+    brew install global --with-exuberant-ctags --with-pygments
+# Linux
+linux*)
+esac
+
 #install necessary files
 #[! -d $HOME/<necessary dir>] && git clone git://============================== $HOME/<necessary dir>
 

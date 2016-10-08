@@ -58,3 +58,7 @@ export PIG_CLASSPATH="$HADOOP_CONF_DIR:$HADOOP_HOME/*:$HADOOP_HOME/lib/*"
 export HBASE_HOME=$CDH5_HOME/hbase-1.0.0-cdh5.4.9
 export HBASE_CONF_DIR=/etc/hbase/conf
 export PATH=$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$PIG_HOME/bin:$HBASE_HOME/bin:$PATH
+
+
+export GTAGSCONF=/usr/local/share/gtags/gtags.conf
+export GTAGSLABEL=pygments
