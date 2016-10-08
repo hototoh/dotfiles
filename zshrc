@@ -7,10 +7,6 @@ export ZPLUG_HOME=$HOME/.zplug
 #
 source $ZSHRC_DIR/zplugrc
 
-# Coustomize
-
-source $ZSHRC_DIR/zshrc.custom
-
 ## alias
 #
 source $ZSHRC_DIR/zshrc.alias
@@ -30,6 +26,10 @@ source $ZSHRC_DIR/zshrc.terminal
 ## OSTYPE
 #
 source $ZSHRC_DIR/zshrc.ostype
+
+# Coustomize
+#
+source $ZSHRC_DIR/zshrc.custom
 
 
 PATH="/Users/tokaku/perl5/bin${PATH:+:${PATH}}"; export PATH;
