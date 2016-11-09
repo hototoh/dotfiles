@@ -1,5 +1,5 @@
 /**
- * Hiroshi Tokaku <tkk@hongo.wide.ad.jp>
+ * @author tkk <hototoh@gmail.com>
  **/
 
 #include <stdio.h>
