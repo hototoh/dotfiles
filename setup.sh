@@ -38,8 +38,10 @@ case "${OSTYPE}" in
 # MacOSX
 darwin*)
     brew install global --with-exuberant-ctags --with-pygments
+    ;;
 # Linux
 linux*)
+    ;;
 esac
 
 #install necessary files
