@@ -52,6 +52,7 @@
     lfe-mode
     markdown-mode
     pkg-info
+    protobuf-mode
     python
     python-mode
     smartparens
@@ -280,3 +281,17 @@ anything-c-source-recentf
              (local-set-key (kbd "M-n") 'helm-gtags-next-history)))    
 
 (load-theme 'wombat t)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (protobuf-mode yaml-mode thrift smooth-scrolling smartparens python-mode markdown-mode lua-mode lfe-mode json-mode js3-mode hlinum helm-package helm-gtags google-c-style go-mode flymake-yaml flymake-shell flymake-python-pyflakes flymake-php flymake-json flymake-google-cpplint flymake-go flycheck-google-cpplint erlang auto-install auto-complete anything-replace-string))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
