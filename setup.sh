@@ -1,4 +1,5 @@
 #!/bin/bash
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 DOT_FILES=("zshrc.d" "zshrc" "vimrc" "vim" "emacs.d" "screenrc" "globalrc" "tmux.conf")
 
@@ -18,12 +19,9 @@ then
     install -o ${USER} -m 0700 -d ${HOME}/.vimbackup
 fi
 
-BUNDLE=${HOME}/dotfiles/vim/bundle
-
-install -o ${USER} -m 0744 -d ${BUNDLE}
-cd ${BUNDLE}
-git clone https://github.com/Shougo/neobundle.vim
-cd -
+DEIN_INSTALLER=/tmp/dein-installer.sh
+curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > ${DEIN_INSTALLER}
+sh ${DEIN_INSTALLER} ${HOME}/.vim/dein/
 
 install -o ${USER} -m 0700 -d ${HOME}/.ssh 
 if [ ! -e ${HOME}/.ssh/authorized_keys ];

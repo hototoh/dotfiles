@@ -1,5 +1,4 @@
-" neobundleで管理されているもの
-source ~/.vim/vimrc.neobundle
+source ~/.vim/dein.rc.vim
 
 set encoding=utf-8
 

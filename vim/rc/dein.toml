@@ -1,0 +1,138 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+rtp = ''
+
+[[plugins]]
+repo = 'Shougo/neocomplete.vim'
+depends = 'context_filetype.vim'
+if = "has('lua')"
+on_event = 'InsertEnter'
+hook_source = '''
+  let g:neocomplete#enable_at_startup = 1
+  source ~/.vim/rc/plugins/neocomplete.rc.vim
+'''
+
+[[plugins]]
+repo = 'Shougo/unite.vim'
+depends = 'neomru.vim'
+on_source = 'denite.nvim'
+hook_source = 'source ~/.vim/rc/plugins/unite.rc.vim'
+hook_add = '''
+  " Tag jump.
+  nnoremap <silent><expr> tt  &filetype == 'help' ?  "g\<C-]>" :
+        \ ":\<C-u>UniteWithCursorWord -buffer-name=tag -immediately
+        \  tag tag/include\<CR>"
+  nnoremap <silent><expr> tp  &filetype == 'help' ?
+        \ ":\<C-u>pop\<CR>" : ":\<C-u>Unite jump\<CR>"
+'''
+
+[[plugins]]
+repo = 'thinca/vim-quickrun'
+
+[[plugins]]
+repo = 'thinca/vim-localrc'
+
+[[plugins]]
+repo = 'hail2u/vim-css3-syntax'
+
+[[plugins]]
+repo = 'kana/vim-filetype-haskell'
+
+[[plugins]]
+repo = 'mxw/vim-jsx'
+
+[[plugins]]
+repo = 'itchyny/vim-haskell-indent'
+
+[[plugins]]
+repo = 'udalov/kotlin-vim'
+
+[[plugins]]
+repo = 'shawncplus/phpcomplete.vim'
+
+[[plugins]]
+repo = 'jiangmiao/simple-javascript-indenter'
+
+[[plugins]]
+repo = 'thinca/vim-ft-diff_fold'
+
+[[plugins]]
+repo = 'thinca/vim-ft-vim_fold'
+
+[[plugins]]
+repo = 'thinca/vim-ft-help_fold'
+
+[[plugins]]
+repo = 'vim-jp/cpp-vim'
+
+[[plugins]]
+repo = 'cespare/vim-toml'
+
+[[plugins]]
+repo = 'elzr/vim-json'
+
+[[plugins]]
+repo = 'fatih/vim-go'
+
+[[plugins]]
+repo = 'vim-jp/autofmt'
+
+[[plugins]]
+repo = 'kana/vim-textobj-user'
+
+[[plugins]]
+repo = 'hynek/vim-python-pep8-indent'
+
+# Operators
+[[plugins]]
+repo = 'kana/vim-operator-user'
+
+[[plugins]]
+repo = 'rcmdnk/vim-markdown'
+
+[[plugins]]
+repo = 'vim-ruby/vim-ruby'
+
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+
+[[plugins]]
+repo = 'Shougo/neosnippet.vim'
+
+[[plugins]]
+repo = 'osyo-manga/unite-vimpatches'
+
+[[plugins]]
+repo = 'mattn/webapi-vim'
+
+[[plugins]]
+repo = 'jelera/vim-javascript-syntax'
+
+[[plugins]]
+repo = 'JesseKPhillips/d.vim'
+
+[[plugins]]
+repo = 'vim-erlang/vim-erlang-runtime'
+
+[[plugins]]
+repo = 'vim-erlang/vim-erlang-omnicomplete'
+
+[[plugins]]
+repo = 'vim-erlang/vim-erlang-tags'
+
+[[plugins]]
+repo = 'nsf/gocode'
+rtp = 'vim'
+
+[[plugins]]
+repo = 'vim-jp/vimdoc-ja'
+
+[[plugins]]
+repo = 'Kocha/vim-unite-tig'
+
+[[plugins]]
+repo = 'kballard/vim-fish'
+
+[[plugins]]
+repo = 'Shougo/neossh.vim'
+
