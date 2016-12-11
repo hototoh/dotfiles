@@ -1,6 +1,19 @@
 #!/bin/bash
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
+case "${OSTYPE}" in
+# MacOSX
+darwin*)
+    brew tap homebrew/dupes
+    brew install global --with-exuberant-ctags --with-pygments
+    brew install zsh
+    ;;
+# Linux
+linux*)
+    ;;
+esac
+
+
 DOT_FILES=("zshrc.d" "zshrc" "vimrc" "vim" "emacs.d" "screenrc" "globalrc" "tmux.conf")
 
 for file in ${DOT_FILES[@]}
@@ -30,17 +43,7 @@ then
 fi
 
 mkdir ${HOME}/.cache
-curl -sL get.zplug.sh | zsh
-
-case "${OSTYPE}" in
-# MacOSX
-darwin*)
-    brew install global --with-exuberant-ctags --with-pygments
-    ;;
-# Linux
-linux*)
-    ;;
-esac
+curl -sL zplug.sh/installer | zsh
 
 #install necessary files
 #[! -d $HOME/<necessary dir>] && git clone git://============================== $HOME/<necessary dir>

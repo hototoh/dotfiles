@@ -11,7 +11,6 @@ alias esocks="ssh -i -2 -D localhost:1080 -l tkk elab-gw.elab"
 case "${OSTYPE}" in
 darwin*)
     alias lsusb='system_profiler SPUSBDataType'
-    alias ls="ls --color=auto"
     ;;
 freebsd*)
     alias ls="ls -G -w"
