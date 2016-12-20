@@ -10,10 +10,11 @@
 ;; Package Manegement
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+;; (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (add-to-list 'load-path "/usr/local/share/gtags")
-(package-initialize)
+(add-to-list 'load-path "/usr/local/share/gtags")
 
+(package-initialize)
 (global-linum-mode t)
 
 ;auto install
@@ -25,10 +26,13 @@
     anything-replace-string
     auto-complete
     auto-install
+    company-irony
+    company-irony-c-headers
     dash
     epl
     erlang
     flycheck
+    flycheck-irony
     flycheck-google-cpplint
     flymake
     flymake-easy
@@ -42,7 +46,9 @@
     ;;github-theme
     go-mode
     google-c-style
+    helm
     hlinum
+    irony
     js3-mode
     json
     json-mode
@@ -55,10 +61,12 @@
     protobuf-mode
     python
     python-mode
+    rtags
     smartparens
     smooth-scrolling
     thrift
     yaml-mode
+    yasnippet
     ))
 (let ((not-installed (loop for x in installing-package-list
                         when (not (package-installed-p x))
@@ -74,31 +82,17 @@
 (ac-config-default)
 (setq ac-modes (append ac-modes '(objc-mode)))
 
-;; 対応する括弧の強調
 (show-paren-mode t)
-; 外部デバイスとクリップボードを共有
 (setq x-select-enable-clipboard t)
-;; 改行でオートインデント
 (global-set-key "\C-m" 'newline-and-indent)
-;; BSやDel、文字入力でリージョン内の文字を削除
 (delete-selection-mode 1)
-;; C-k １回で行全体を削除する
 (setq kill-whole-line t)
-;;(global-hl-line-mode)
 (setq require-final-newline t)
-
-;; M-jを入力すると対応するカッコに飛ぶ
 (global-set-key (kbd "M-j") 'match-paren)
-;; Ctrl + :でgoto line
 (define-key global-map (kbd "C-:") 'goto-line)
-;; Ctrl + Shift + 7でaddrev静的展開
 (define-key global-map (kbd "C-'") 'expand-addrev)
-;; Ctrl + hでdelete backward char
 (define-key global-map (kbd "C-h") 'delete-backward-char)
-;; Ctrl-x p で逆向きへのウィンドウ移動
 (global-set-key "\C-xp" (lambda () (interactive) (other-window -1)))
-
-;; ウインドウ間移動のキーバインドにC-\を追加
 (define-key global-map "\C-\\" 'other-window)
 
 (defun match-paren (arg)
@@ -107,12 +101,10 @@
 (cond ((looking-at "\\s\(") (forward-list 1) (backward-char 1))
     ((looking-at "\\s\)") (forward-char 1) (backward-list 1))
     (t (self-insert-command (or arg 1)))))
-;indent幅をtab=space4つに
-;;通常インデントをspace4つに
+
 (setq tab-width 4)
 (setq indent-tabs-mode nil)
 
-;; emacs内部シェルのlsオプション設定
 (setq dired-listing-switches "-lh")
 
 ;; 分割ウインドウをShift+カーソルキーで移動
@@ -159,13 +151,9 @@
       (switch-to-buffer anything-buffer))))
 
 (define-key anything-map "\C-j" 'my-anything-toggle-resplit-window)
-;;バッファの一覧を取得
 anything-c-source-buffers
-;;バッファにマッチしなかった場合にバッファを作成
 anything-c-source-buffer-not-found
-;;カレントディレクトリにあるファイル一覧
 anything-c-source-files-in-current-dir
-;;最近開いたファイル一覧
 anything-c-source-recentf
 (setq recentf-max-saved-items 3000)
 (recentf-mode 1)
@@ -173,7 +161,6 @@ anything-c-source-recentf
 
 ;; Python-mode-hook
 (require 'python-mode)
-
 ;; (add-hook 'python-mode-hook
 ;; 	  (lambda ()
 ;; 	    (define-key python-mode-map "\"" 'electric-pair)
@@ -189,13 +176,44 @@ anything-c-source-recentf
 ;;     (insert-pair)))
 ;; (add-hook 'python-mode-hook '(lambda ()
 ;; 			       (define-key python-mode-map "\C-m" 'newline-and-indent)))
-;;; Pythonにて1行80文字を超えるとハイライト
 (add-hook 'python-mode-hook
   (lambda ()
     (font-lock-add-keywords nil
       '(("^[^\n]\\{80\\}\\(.*\\)$" 1 font-lock-warning-face t)))))
 
 ;; C, C++ Style
+(require 'irony)
+(add-hook 'c-mode-hook 'irony-mode)
+(add-hook 'c++-mode-hook 'irony-mode)
+(add-hook 'objc-mode-hook 'irony-mode)
+(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+(with-eval-after-load 'company
+    (add-to-list 'company-backends 'company-irony))
+
+(setq irony-lang-compile-option-alist
+       '((c++-mode . ("c++" "-std=c++11" "-lstdc++" "-lm"))
+                 (c-mode . ("c"))
+                 (objc-mode . '("objective-c"))))
+(defun irony--lang-compile-option ()
+   (irony--awhen (cdr-safe (assq major-mode irony-lang-compile-option-alist))
+        (append '("-x") it)))
+
+(add-to-list 'load-path
+	     "~/.emacs.d/plugins/yasnippet")
+(require 'yasnippet)
+(yas-global-mode 1)
+
+
+;; replace the `completion-at-point' and `complete-symbol' bindings in
+;; irony-mode's buffers by irony-mode's function
+(defun my-irony-mode-hook ()
+  (define-key irony-mode-map [remap completion-at-point]
+    'irony-completion-at-point-async)
+  (define-key irony-mode-map [remap complete-symbol]
+    'irony-completion-at-point-async))
+(add-hook 'irony-mode-hook 'my-irony-mode-hook)
+(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+
 (defun my-c-namespace-indent (langelem)
     (save-excursion
         (if (or (looking-at "[ \t]*namespace[ \t{]")
@@ -209,35 +227,35 @@ anything-c-source-recentf
                            (skip-chars-backward " \t")
                            (bolp)) 2)
           )))) 
-(defun my-c-c++-mode-init () 
-    (require 'google-c-style) 
-    (google-set-c-style)
-    (google-make-newline-indent)
-    (add-hook 'c-mode-common-hook 'google-set-c-style)
-    (setq tab-width 4) 
-    (setq c-basic-offset 4)
-;;    (c-set-offset 'innamespace 'my-c-namespace-indent)
-    (c-set-offset 'innamespace 0)
-    (c-set-offset 'class-open 0)
-    (c-set-offset 'class-close 0)
-    (c-set-offset 'namespace-open 0)
-    (c-set-offset 'namespace-close 0)
-    (c-set-offset 'access-label '/)
-    (auto-revert-mode)
-)
-(add-hook 'c++-mode-hook 'my-c-c++-mode-init)
-(add-hook 'c++-mode-hook
-  (lambda ()
-    (font-lock-add-keywords nil
-      '(("^[^\n]\\{80\\}\\(.*\\)$" 1 font-lock-warning-face t)))
-   ))
-(add-hook 'c-mode-hook 'my-c-c++-mode-init)
-(add-hook 'c-mode-hook
-  (lambda ()
-    (font-lock-add-keywords nil
-      '(("^[^\n]\\{80\\}\\(.*\\)$" 1 font-lock-warning-face t)))
-   ))
-(add-to-list 'auto-mode-alist '("\\.h$" . c++-mode))
+;; (defun my-c-c++-mode-init () 
+;;     (require 'google-c-style) 
+;;     (google-set-c-style)
+;;     (google-make-newline-indent)
+;;     (add-hook 'c-mode-common-hook 'google-set-c-style)
+;;     (setq tab-width 4) 
+;;     (setq c-basic-offset 4)
+;; ;;    (c-set-offset 'innamespace 'my-c-namespace-indent)
+;;     (c-set-offset 'innamespace 0)
+;;     (c-set-offset 'class-open 0)
+;;     (c-set-offset 'class-close 0)
+;;     (c-set-offset 'namespace-open 0)
+;;     (c-set-offset 'namespace-close 0)
+;;     (c-set-offset 'access-label '/)
+;;     (auto-revert-mode)
+;; )
+;; (add-hook 'c++-mode-hook 'my-c-c++-mode-init)
+;; (add-hook 'c++-mode-hook
+;;   (lambda ()
+;;     (font-lock-add-keywords nil
+;;       '(("^[^\n]\\{80\\}\\(.*\\)$" 1 font-lock-warning-face t)))
+;;    ))
+;; (add-hook 'c-mode-hook 'my-c-c++-mode-init)
+;; (add-hook 'c-mode-hook
+;;   (lambda ()
+;;     (font-lock-add-keywords nil
+;;       '(("^[^\n]\\{80\\}\\(.*\\)$" 1 font-lock-warning-face t)))
+;;    ))
+;; (add-to-list 'auto-mode-alist '("\\.h$" . c++-mode))
 ;;; C系統,Pythonにて1行80文字を超えるとハイライト
 ;;  (lambda ()
 ;;    (font-lock-add-keywords nil
