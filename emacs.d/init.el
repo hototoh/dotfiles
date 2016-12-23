@@ -114,6 +114,9 @@
     ((looking-at "\\s\)") (forward-char 1) (backward-list 1))
     (t (self-insert-command (or arg 1)))))
 (global-set-key (kbd "M-j") 'match-paren)
+(setq custom-file (locate-user-emacs-file "~/.emacs.d/custom.el"))
+(with-eval-after-load 'flycheck
+   (flycheck-pos-tip-mode)) 
 
 ;; template settings
 (auto-insert-mode)
@@ -125,32 +128,3 @@
 (define-auto-insert "\\.erl$" "basic-template.erl")
 (define-auto-insert "\\.html$" "basic-template.html")
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(flycheck-display-errors-delay 0.5)
- '(flycheck-display-errors-function
-   (lambda
-     (errors)
-     (let
-	 ((messages
-	   (mapcar
-	    (function flycheck-error-message)
-	    errors)))
-       (popup-tip
-	(mapconcat
-	 (quote identity)
-	 messages "
-")))))
- '(irony-additional-clang-options (quote ("-std=c++11")))
- '(package-selected-packages
-   (quote
-    (yasnippet rtags irony flycheck-irony company-irony-c-headers company-irony yaml-mode thrift smooth-scrolling smartparens python-mode protobuf-mode markdown-mode lua-mode lfe-mode json-mode js3-mode hlinum google-c-style go-mode flymake-yaml flymake-shell flymake-python-pyflakes flymake-php flymake-json flymake-google-cpplint flymake-go flycheck-google-cpplint erlang))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
