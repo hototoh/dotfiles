@@ -20,7 +20,7 @@ typedef long long ll;
 typedef vector<int> vi;
 typedef vector<long> vl;
 
-#define ten(n) ((int)1e##n)
+#define ten(n) (1e##n)
 #define COUT cout <<
 #define SPACE_COUT << " "  <<
 #define COMMA_COUT << ", " <<

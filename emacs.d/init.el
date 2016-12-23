@@ -49,29 +49,6 @@
 (dolist (pkg not-installed)
     (package-install pkg))))
 
-(setq tab-width 4)
-(setq indent-tabs-mode nil)
-(show-paren-mode t)
-(global-linum-mode t)
-(delete-selection-mode t)
-(defun match-paren (arg)
-"Go to the matching paren if on a paren; otherwise insert %."
-(interactive "p")
-(cond ((looking-at "\\s\(") (forward-list 1) (backward-char 1))
-    ((looking-at "\\s\)") (forward-char 1) (backward-list 1))
-    (t (self-insert-command (or arg 1)))))
-(global-set-key (kbd "M-j") 'match-paren)
-
-;; template settings
-(auto-insert-mode)
-(setq auto-insert-directory "~/.emacs.d/insert/")
-(define-auto-insert "\\.py$" "basic-template.py")
-(define-auto-insert "\\.c$" "basic-template.c")
-(define-auto-insert "\\.cc$" "basic-template.cc")
-(define-auto-insert "\\.pcon.cc$" "programming-contest-template.cc")
-(define-auto-insert "\\.erl$" "basic-template.erl")
-(define-auto-insert "\\.html$" "basic-template.html")
-
 
 (eval-after-load "yasnippet"
   '(progn
@@ -123,4 +100,57 @@
                 (local-set-key (kbd "M-;") 'rtags-find-symbol)
                 (local-set-key (kbd "M-@") 'rtags-find-references)
                 (local-set-key (kbd "M-,") 'rtags-location-stack-back)))))
-(package-initialize)
+
+
+(setq tab-width 4)
+(setq indent-tabs-mode nil)
+(show-paren-mode t)
+(global-linum-mode t)
+(delete-selection-mode t)
+(defun match-paren (arg)
+"Go to the matching paren if on a paren; otherwise insert %."
+(interactive "p")
+(cond ((looking-at "\\s\(") (forward-list 1) (backward-char 1))
+    ((looking-at "\\s\)") (forward-char 1) (backward-list 1))
+    (t (self-insert-command (or arg 1)))))
+(global-set-key (kbd "M-j") 'match-paren)
+
+;; template settings
+(auto-insert-mode)
+(setq auto-insert-directory "~/.emacs.d/insert/")
+(define-auto-insert "\\.py$" "basic-template.py")
+(define-auto-insert "\\.c$" "basic-template.c")
+(define-auto-insert "\\.cc$" "basic-template.cc")
+(define-auto-insert "\\.pcon.cc$" "programming-contest-template.cc")
+(define-auto-insert "\\.erl$" "basic-template.erl")
+(define-auto-insert "\\.html$" "basic-template.html")
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(flycheck-display-errors-delay 0.5)
+ '(flycheck-display-errors-function
+   (lambda
+     (errors)
+     (let
+	 ((messages
+	   (mapcar
+	    (function flycheck-error-message)
+	    errors)))
+       (popup-tip
+	(mapconcat
+	 (quote identity)
+	 messages "
+")))))
+ '(irony-additional-clang-options (quote ("-std=c++11")))
+ '(package-selected-packages
+   (quote
+    (yasnippet rtags irony flycheck-irony company-irony-c-headers company-irony yaml-mode thrift smooth-scrolling smartparens python-mode protobuf-mode markdown-mode lua-mode lfe-mode json-mode js3-mode hlinum google-c-style go-mode flymake-yaml flymake-shell flymake-python-pyflakes flymake-php flymake-json flymake-google-cpplint flymake-go flycheck-google-cpplint erlang))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
